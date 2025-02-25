@@ -3,7 +3,7 @@
 import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 
-export default function Register()
+export default function Login()
 {
 const router = useRouter();
 
@@ -16,7 +16,7 @@ return (
           <label className="block text-gray-600 font-medium mb-1">Váš e-mail:</label>
           <input
             type="email"
-            className="w-full border border-gray-300 p-2 rnounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white"
+            className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white"
           />
         </div>
 
@@ -30,12 +30,22 @@ return (
 
         <Button className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition"
         onPress={() => router.push("/")}>
-          Registrovat se
+          Přihlásit se
         </Button>
 
         <Button className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition"
-        onPress={() => router.push("login")}>
-          Máte účet? Přihlásit se
+        onPress={() => router.push("register")}>
+          Registrovat se
+        </Button>
+
+        <Button className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition" 
+        onPress={() => router.push("changeEmail")}>
+          Změna e-mailu
+        </Button>
+
+        <Button className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition" 
+        onPress={() => router.push("changePassword")}>
+          Změna hesla
         </Button>
       </div>
     </div>
