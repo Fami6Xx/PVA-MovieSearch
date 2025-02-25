@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@heroui/button";
-import { Card, CardFooter, Image } from "@heroui/react";
+import { Card, Image } from "@heroui/react";
 import { Input } from "@heroui/input";
 import { useState } from "react";
 
@@ -10,13 +10,15 @@ const recommendedMovies = [
   { id: 2, title: "Don Pollo: Chicken Chase", tags: ["sci-fi", "drama"], image: "https://i1.sndcdn.com/artworks-HLlqmQQ3FERlTeGb-dHzC8A-t500x500.jpg" },
   { id: 3, title: "Lingan Gu 2", tags: ["sci-fi", "action"], image: "https://static.wikia.nocookie.net/085034e2-945f-48df-907c-8d2729b1d2d7/scale-to-width/755" },
   { id: 4, title: "Salamalejkum", tags: ["action", "drama"], image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNAUXjHupbqlNVm0fwY6qjQoArgeWpuHFEJg&s" },
-  { id: 5, title: "Deprese v kostce", tags: ["sci-fi", "action"], image: "https://cdn.britannica.com/32/261832-050-9E8BB966/Close-up-man-smoking-electronic-cigarette-vape-pen.jpg" }
+  { id: 5, title: "Deprese v kostce", tags: ["sci-fi", "action"], image: "https://cdn.britannica.com/32/261832-050-9E8BB966/Close-up-man-smoking-electronic-cigarette-vape-pen.jpg" },
+  { id: 6, title: "Tralalero tralala", tags: ["horror"], image: "https://upload.wikimedia.org/wikipedia/en/9/9a/Among_Us_cover_art.jpg" },
+  { id: 7, title: "Soro", tags: ["action", "sci-fi"], image: "https://cdn1.staticpanvel.com.br/produtos/15/111547-15.jpg?ims=424x" },
+  { id: 8, title: "Number Floor", tags: ["horror", "comedy"], image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC_TmUZFiobCsnSqyAloIuRQRSY7kG19mnSg&s" },
+  { id: 9, title: "Sushi Sam:Comeback", tags: ["action"], image: "https://imagedelivery.net/LBWXYQ-XnKSYxbZ-NuYGqQ/6e4118ce-4984-4344-9249-51c2b08c6100/avatarhd" }
 ];
 
 export default function Home() {
   const [userTags, setUserTags] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const filteredMovies = recommendedMovies.filter((movie) =>
     userTags.length === 0 || movie.tags.some((tag) => userTags.includes(tag))
@@ -27,58 +29,43 @@ export default function Home() {
       <h1 className="text-3xl font-bold">Doporučené filmy</h1>
 
       <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold">Nastavení tagů</h2>
+        <h2 className="text-xl font-semibold">Napište žánr</h2>
         <Input
           type="text"
-          placeholder="Zadejte tagy, oddělené čárkou"
+          placeholder="Zadejte žánry, oddělené čárkou"
           onChange={(e) => setUserTags(e.target.value.split(",").map(tag => tag.trim()))}
         />
       </div>
 
-      <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold">Změna emailu</h2>
-        <div className="flex gap-2">
-          <Input
-            type="email"
-            placeholder="Nový email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Button>Uložit</Button>
-        </div>
-      </div>
-
-      <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold">Změna hesla</h2>
-        <div className="flex gap-2">
-          <Input
-            type="password"
-            placeholder="Nové heslo"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button>Uložit</Button>
-        </div>
-      </div>
-
-      <div className="w-full max-w-4xl overflow-x-auto whitespace-nowrap flex space-x-4 py-4">
+      <div className="flex-container">
         {filteredMovies.map((movie) => (
-          <Card key={movie.id} isFooterBlurred className="border-none relative" radius="lg" style={{ minWidth: "220px" }}>
-            <Image
-              alt={movie.title}
-              className="object-cover"
-              height={200}
-              src={movie.image}
-              width={200}
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-              <p className="text-lg font-bold text-white p-2 bg-black rounded-lg">{movie.title}</p>
-            </div>
-            <CardFooter className="flex items-center justify-center before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 left-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-            </CardFooter>
-          </Card>
+          <div key={movie.id} className="card-container">
+            <p className="text-lg font-bold text-white bg-black px-2 py-1 rounded">{movie.title}</p>
+            <Card isFooterBlurred className="border-none relative" radius="lg" style={{ minWidth: "220px" }}>
+              <Image
+                alt={movie.title}
+                className="object-cover"
+                height={200}
+                src={movie.image}
+                width={200}
+              />
+            </Card>
+          </div>
         ))}
       </div>
+
+      <style jsx>{`
+        .flex-container {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 10px;
+        }
+
+        .card-container {
+          margin: 10px;
+          text-align: center;
+        }
+      `}</style>
     </div>
   );
 }
