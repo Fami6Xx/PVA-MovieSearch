@@ -29,7 +29,7 @@ return (
         </div>
 
         <Button className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition"
-        onPress={() => router.push("/")}>
+        onPress={() => router.push("addFilm")}>
           Přihlásit se
         </Button>
 
