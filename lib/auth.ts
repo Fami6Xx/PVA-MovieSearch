@@ -1,31 +1,35 @@
-import DiscordProvider from "next-auth/providers/discord";
-import prisma from "@/lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import prisma from "@/lib/prisma";
+import bcrypt from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID!,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET!,
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const user = await prisma.user.findUnique({
+          where: { email: credentials?.email },
+        });
+
+        if (user && bcrypt.compareSync(credentials?.password, user.password)) {
+          return user;
+        } else {
+          return null;
+        }
+      },
     }),
   ],
   callbacks: {
-    async session({ session, user }: { session: any, user: any }) {
+    async session({ session, user }) {
       if (session.user) {
-        const dbUser = await prisma.user.findUnique({
-          where: {
-            id: user.id,
-          },
-        });
-
-        if (dbUser) {
-          session.user = {
-            ...session.user,
-            ...dbUser,
-          }
-        }
+        session.user.id = user.id;
       }
       return session;
     },
