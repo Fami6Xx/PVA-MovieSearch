@@ -15,3 +15,28 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Movie {
+  id          String   @id @default(uuid())
+  title       String
+  image       String
+  tags        MovieTag[] // Vztah N:M přes spojovací tabulku
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Tag {
+  id    String      @id @default(uuid())
+  name  String      @unique
+  movies MovieTag[] // Vztah N:M přes spojovací tabulku
+}
+
+model MovieTag {
+  id      String @id @default(uuid())
+  movieId String
+  tagId   String
+  movie   Movie  @relation(fields: [movieId], references: [id])
+  tag     Tag    @relation(fields: [tagId], references: [id])
+
+  @@unique([movieId, tagId]) // Zajišťuje, že kombinace movieId a tagId je unikátní
+}
