@@ -35,7 +35,7 @@ body {
 }
 
 .save-button {
-  @apply bg-green-500;
+  @apply bg-green-500 rounded-2xl;
 }
 
 .back-button {
@@ -47,7 +47,7 @@ body {
 }
 
 .remove-button {
-  @apply w-full bg-red-600 mt-3;
+  @apply w-full bg-red-600 mt-3 rounded-lg;
 }
 
 .image-preview {
