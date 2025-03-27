@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Button } from "@heroui/button";
 import { Card, Image } from "@heroui/react";
 import { Input } from "@heroui/input";
@@ -20,6 +21,8 @@ const recommendedMovies = [
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
+
 
   const filteredMovies = recommendedMovies.filter((movie) =>
     searchTerm === "" ||
@@ -29,7 +32,18 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center p-6 space-y-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold">Doporučené filmy</h1>
+      <div className="flex items-center justify-center w-full max-w-md">
+        <h1 className="text-3xl font-bold text-center flex-1">Doporučené filmy</h1>
+        <Button
+          size="md"
+          color="primary"
+          variant="solid"
+          className="ml-6" // Zvýšený margin-left
+          onPress={() => router.push("addFilm")} // Přesměrování na jinou stránku
+        >
+          Přidat film
+        </Button>
+      </div>
 
       <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-md">
         <h2 className="text-xl font-semibold">Vyhledávání</h2>
@@ -37,6 +51,7 @@ export default function Home() {
           type="text"
           placeholder="Zadejte název filmu nebo žánr"
           onChange={(e) => setSearchTerm(e.target.value.trim())}
+          style={{ color: "white" }}
         />
       </div>
 
