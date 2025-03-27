@@ -13,7 +13,7 @@ export default function Change() {
     <div className="w-full max-w-md space-y-4">
       <div className="p-4 bg-white rounded-lg shadow-md">
         <h2 className="text-xl font-semibold">Změna hesla</h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 blud">
           <Input
             type="password"
             placeholder="Nové heslo"
