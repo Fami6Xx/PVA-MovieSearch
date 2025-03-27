@@ -30,6 +30,18 @@ body {
   @apply w-full py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition font-semibold mt-4;
 }
 
-.bttn{
-  @apply mt-4
+.alt-button {
+  @apply mt-4;
+}
+
+.save-button {
+  @apply bg-green-500;
+}
+
+.back-button {
+  @apply text-white rounded-2xl bg-red-600 mt-4;
+}
+
+.change-input {
+  @apply text-white;
 }

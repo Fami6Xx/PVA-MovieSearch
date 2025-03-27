@@ -6,26 +6,26 @@ import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 
 export default function Change() {
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   return (
     <div className="w-full max-w-md space-y-4">
       <div className="p-4 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold">Změna e-mailu</h2>
+        <h2 className="text-xl font-semibold">Změna hesla</h2>
         <div className="flex gap-2">
           <Input
-            type="email"
-            placeholder="Nový email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="password"
+            placeholder="Nové heslo"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="change-input"
           />
-          <Button className="save-button" onPress={() => router.push("changeDialog")}>Uložit</Button>
+          <Button className="save-button" onPress={() => router.push("login")}>Uložit</Button>
         </div>
 
         <Button className="w-full py-2 text-white rounded-md transition back-button" 
-        onPress={() => router.push("changeDialog")}>
+        onPress={() => router.push("login")}>
           Zpět
         </Button>
       </div>

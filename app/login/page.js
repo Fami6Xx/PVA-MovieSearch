@@ -21,16 +21,12 @@ export default function Login() {
           <input type="password" className="form-input" />
         </div>
 
-        <Button className="form-button mb-3" onPress={() => router.push("addFilm")}>
+        <Button className="form-button mb-3" onPress={() => router.push("changeDialog")}>
           Přihlásit se
         </Button>
 
-        <Button className="form-button mb-3" onPress={() => router.push("changeEmail")}>
-          Změna e-mailu
-        </Button>
-
-        <Button className="form-button" onPress={() => router.push("changePassword")}>
-          Změna hesla
+        <Button className="mb-3 alt-button" onPress={() => router.push("forgotPassword")}>
+          Zapomenuté heslo
         </Button>
       </div>
     </div>
