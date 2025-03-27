@@ -13,18 +13,19 @@ export default function Change() {
     <div className="w-full max-w-md space-y-4">
       <div className="p-4 bg-white rounded-lg shadow-md">
         <h2 className="text-xl font-semibold">Změna hesla</h2>
-        <div className="flex gap-2 blud">
+        <div className="flex gap-2">
           <Input
             type="password"
             placeholder="Nové heslo"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="change-input"
           />
-          <Button onPress={() => router.push("login")}>Uložit</Button>
+          <Button className="save-button" onPress={() => router.push("changeDialog")}>Uložit</Button>
         </div>
 
-        <Button className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition" 
-        onPress={() => router.push("login")}>
+        <Button className="w-full py-2 text-white rounded-md transition back-button" 
+        onPress={() => router.push("changeDialog")}>
           Zpět
         </Button>
       </div>
