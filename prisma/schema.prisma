@@ -40,3 +40,13 @@ model MovieTag {
 
   @@unique([movieId, tagId]) // Zajišťuje, že kombinace movieId a tagId je unikátní
 }
+
+model FavoriteMovie {
+  id      String @id @default(uuid())
+  userId  String
+  movieId String
+  user    User   @relation(fields: [userId], references: [id])
+  movie   Movie  @relation(fields: [movieId], references: [id])
+
+  @@unique([userId, movieId]) // Zajišťuje, že kombinace userId a movieId je unikátní
+}
