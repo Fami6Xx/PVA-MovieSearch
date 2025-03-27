@@ -16,7 +16,7 @@ export default function Change() {
         <div className="flex gap-2">
           <Input
             type="email"
-            placeholder="Nový email"
+            placeholder="Nový e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="change-input"

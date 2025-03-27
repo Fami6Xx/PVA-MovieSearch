@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@heroui/button";
 import Image from "next/image";
@@ -9,6 +9,7 @@ export default function AddFilm() {
   const router = useRouter();
   const [movieName, setMovieName] = useState("");
   const [image, setImage] = useState(null);
+  const fileInputRef = useRef(null);
 
   const handleImageUpload = (event) => {
     const file = event.target.files?.[0];
@@ -19,6 +20,16 @@ export default function AddFilm() {
 
   const handleAddFilm = () => {
     window.location.reload();
+  };
+
+  const removeImage = () => {
+    if (image) {
+      setImage(null);
+      if(fileInputRef.current)
+      {
+        fileInputRef.current.value = "";
+      }
+    }
   };
 
   return (
@@ -40,6 +51,7 @@ export default function AddFilm() {
         <div className="mb-4">
           <label className="form-label">Obrázek:</label>
           <input
+            ref={fileInputRef}
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
@@ -57,6 +69,12 @@ export default function AddFilm() {
               className="image-preview"
             />
           </div>
+        )}
+
+        {image && (
+        <Button className="remove-button" onPress={removeImage}>
+          Odebrat obrázek
+        </Button>
         )}
 
         <Button className="form-button active-button" onPress={handleAddFilm}>

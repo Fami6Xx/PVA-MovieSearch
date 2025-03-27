@@ -45,3 +45,11 @@ body {
 .change-input {
   @apply text-white;
 }
+
+.remove-button {
+  @apply w-full bg-red-600 mt-3;
+}
+
+.image-preview {
+  @apply mt-3;
+}

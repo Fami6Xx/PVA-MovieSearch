@@ -9,7 +9,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500">
       <div className="form-container">
-        <h2 className="form-heading">Změna údajů</h2>
+        <h2 className="form-heading">Vybrat</h2>
 
         <Button className="form-button" onPress={() => router.push("/")}>
           Všechny filmy

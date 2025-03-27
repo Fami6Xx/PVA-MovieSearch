@@ -9,9 +9,6 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const isValidEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-  const isDisabled = !isValidEmail || password.length < 6;
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500">
       <div className="form-container">
@@ -23,11 +20,8 @@ export default function Register() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={`form-input ${email && !isValidEmail ? "invalid-email" : "border-gray-300 focus:ring-blue-500"}`}
+            className={"form-input"}
           />
-          {email && !isValidEmail && (
-            <p className="text-red-500 text-sm mt-1">Neplatný e-mailový formát</p>
-          )}
         </div>
 
         <div className="mb-6">
@@ -41,14 +35,13 @@ export default function Register() {
         </div>
 
         <Button
-          className={`form-button ${isDisabled ? "disabled-button" : "active-button"}`}
+          className="form-button"
           onPress={() => router.push("login")}
-          disabled={isDisabled}
         >
           Registrovat se
         </Button>
 
-        <Button className="alt-button bttn" onPress={() => router.push("login")}>
+        <Button className="alt-button" onPress={() => router.push("login")}>
           Máte účet? Přihlásit se
         </Button>
       </div>
