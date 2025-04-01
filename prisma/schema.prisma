@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql" 
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -8,26 +8,28 @@ generator client {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String?
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String          @id @default(uuid())
+  name          String?
+  email         String          @unique
+  password      String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  FavoriteMovie FavoriteMovie[]
 }
 
 model Movie {
-  id          String   @id @default(uuid())
-  title       String
-  image       String
-  tags        MovieTag[] // Vztah N:M přes spojovací tabulku
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String          @id @default(uuid())
+  title         String
+  image         String
+  tags          MovieTag[] // Vztah N:M přes spojovací tabulku
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  FavoriteMovie FavoriteMovie[]
 }
 
 model Tag {
-  id    String      @id @default(uuid())
-  name  String      @unique
+  id     String     @id @default(uuid())
+  name   String     @unique
   movies MovieTag[] // Vztah N:M přes spojovací tabulku
 }
 
