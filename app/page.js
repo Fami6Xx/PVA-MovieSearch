@@ -108,6 +108,7 @@ export default function Home() {
         .card-container:hover .hover-button {
           opacity: 1;
           pointer-events: auto; /* Umožní interakci, když je viditelné */
+          /* čuss */
         }
       `}</style>
     </div>
