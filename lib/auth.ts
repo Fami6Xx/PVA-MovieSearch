@@ -26,7 +26,10 @@ export const authOptions: NextAuthOptions = {
             return null;
         }
 
-        if (user && await bcrypt.compare(credentials.password, user.password)) {
+        const firstPassword = credentials.password as string;
+        const secondPassword = user?.password as string;
+
+        if (user && await bcrypt.compare(firstPassword, secondPassword)) {
           // Exclude the password field before returning the user
           const { password, ...userWithoutPassword } = user;
           return userWithoutPassword;
