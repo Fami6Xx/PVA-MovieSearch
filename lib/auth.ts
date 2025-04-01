@@ -19,19 +19,29 @@ export const authOptions: NextAuthOptions = {
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials?.email },
+          where: { email: credentials.email },
         });
 
-        if (user && bcrypt.compareSync(credentials.password, user.password)) {
-          return user;
-        } else {
-          return null;
+        if (user && await bcrypt.compare(credentials.password, user.password)) {
+          // Exclude the password field before returning the user
+          const { password, ...userWithoutPassword } = user;
+          return userWithoutPassword;
         }
+
+        return null;
       },
     }),
   ],
   callbacks: {
-    async session({ session, user }) {
+    async jwt({ token, user }) {
+      // When user is returned from authorize, attach the user id to the JWT token.
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Attach the user id from token to session.user so it’s available on the client.
       return session;
     },
   },
