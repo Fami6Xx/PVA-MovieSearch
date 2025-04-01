@@ -14,11 +14,15 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) {
+          return null;
+        }
+
         const user = await prisma.user.findUnique({
           where: { email: credentials?.email },
         });
 
-        if (user && bcrypt.compareSync(credentials?.password, user.password)) {
+        if (user && bcrypt.compareSync(credentials.password, user.password)) {
           return user;
         } else {
           return null;
