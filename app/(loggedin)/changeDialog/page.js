@@ -11,7 +11,7 @@ export default function Login() {
       <div className="form-container">
         <h2 className="form-heading">Vybrat</h2>
 
-        <Button className="form-button" onPress={() => router.push("/")}>
+        <Button className="form-button" onPress={() => router.push("allFilms")}>
           Všechny filmy
         </Button>
 
