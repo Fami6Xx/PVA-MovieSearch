@@ -81,7 +81,7 @@ export default function AddFilm() {
           Přidat film
         </Button>
 
-        <Button className="alt-button" onPress={() => router.push("allFilms")}>
+        <Button className="alt-button" onPress={() => router.push("/")}>
           Všechny filmy
         </Button>
       </div>
