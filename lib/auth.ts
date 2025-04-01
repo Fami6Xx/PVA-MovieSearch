@@ -39,6 +39,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     async jwt({ token, user }) {
       // When user is returned from authorize, attach the user id to the JWT token.
